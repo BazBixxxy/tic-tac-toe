@@ -2,7 +2,6 @@
 
 This is a project assignment from The Odin Project
 
-
 Algorithm
 
 # html
@@ -60,15 +59,28 @@ Back to handleClick function:
 
 4.  check for win or draw:
     > we start off by defining the winning combinations on our board, in this case we are using a 3x3 board and our array starts from 0, in order to win in tic tac toe the x or circles should either be aligned vertically, horizontally, or diagonally:
-    > const WINNING_COMBINATIONS = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
+
+const WINNING_COMBINATION = [
+[0, 1, 2],
+[3, 4, 5],
+[6, 7, 8],
+[0, 3, 6],
+[1, 4, 7],
+[2, 5, 8],
+[0, 4, 8],
+[2, 4, 6],
+];
+
     > we create a function [checkWin(currentClass)] to loop through the cellElement classes to determine which element class satisfies any of the combinations first.
     > we use the some function which returns true if any class satisfies the combination(condition) and we the use the every function which returns true if the value satisfies the given function:
-    > [function checkWin(currentClass){
-    > return WINNING_COMBINATIONS.some(combinations => {
-         return combination.every(index => {
-           return cellElement[index].classList.contains(currentClass)
-         })
-    }) }]
+
+function checkWin(currentClass) {
+return WINNING_COMBINATION.some((combinations) => {
+return combinations.every((index) => {
+return cellElements[index].classList.contains(currentClass);
+});
+});
+}
 
 > in the handleClick function we need to write code to do something if a particular play wins:
 
@@ -86,12 +98,13 @@ Back to handleClick function:
   else{- we swap turns and set the board hover class})]
 
 > we create the draw function which essentially checks if all the cells have classes without having a winner (since the cell element querySelectorAll isn't an actual array we destructure it):
-> function isDraw(){
-> return [...cellElements].every(cell => {
 
-    return (cell.classList.contains(X_CLASS)||cell.classList.contains(O_CLASS))
-
-})
+function isDraw() {
+return [...cellElements].every((cell) => {
+return (
+cell.classList.contains(X_CLASS) || cell.classList.contains(CIRCLE_CLASS)
+);
+});
 }
 
 LASTLY:
@@ -100,9 +113,15 @@ LASTLY:
 
 - In the function we set the circleTurn to false in order for X to start
 - we move the cell event listener into this function and in it we remove all the cell class lists of X and O
-- we set the board hover effect by call its function 
+- we set the board hover effect by call its function
 - remove the show class list on the result panel
 
->>> the final thing is to organise our code.
+> > > the final thing is to organise our code.
 
-# the minimax algorithm
+Expected improvement:
+
+1. work on the overall styling of the game
+2. add player accounts and sign in
+3. add a score board to store the scores of each player
+4. apply a multiplayer mode
+5. apply the minimax algorithm incase the player wants to play against the computer
